@@ -59,7 +59,6 @@ class AppThemeData {
         contentTextStyle: _textTheme.titleMedium!.apply(color: _darkFillColor),
       ),
       listTileTheme: ListTileThemeData(
-        tileColor: colorScheme.surface,
         iconColor: colorScheme.primary,
         textColor: colorScheme.onSurface,
       ),

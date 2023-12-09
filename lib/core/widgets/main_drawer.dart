@@ -1,3 +1,4 @@
+import 'package:boilerplate/core/widgets/chat_thread.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -27,66 +28,24 @@ class MainDrawer extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                ListTile(
-                  title: Text('ChatGPT Flutter App'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('GraphQL in Flutter'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('REST API Explanation'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('Jitsi Meet in Flutter'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('Websockets in Flutter'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('ChatGPT Flutter App'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('GraphQL in Flutter'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('REST API Explanation'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('Jitsi Meet in Flutter'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('Websockets in Flutter'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('ChatGPT Flutter App'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('GraphQL in Flutter'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('REST API Explanation'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('Jitsi Meet in Flutter'),
-                  onTap: () {},
-                ),
-                ListTile(
-                  title: Text('Websockets in Flutter'),
-                  onTap: () {},
-                ),
+                ChatThread(name: 'GraphQL in Flutter'),
+                ChatThread(name: 'REST API Explanation'),
+                ChatThread(name: 'Jitsi Meet in Flutter'),
+                ChatThread(name: 'Websockets in Flutter'),
+                ChatThread(name: 'ChatGPT Flutter App'),
+                ChatThread(name: 'GraphQL in Flutter'),
+                ChatThread(name: 'REST API Explanation'),
+                ChatThread(name: 'Jitsi Meet in Flutter'),
+                ChatThread(name: 'Websockets in Flutter'),
+                ChatThread(name: 'GraphQL in Flutter'),
+                ChatThread(name: 'REST API Explanation'),
+                ChatThread(name: 'Jitsi Meet in Flutter'),
+                ChatThread(name: 'Websockets in Flutter'),
+                ChatThread(name: 'ChatGPT Flutter App'),
+                ChatThread(name: 'GraphQL in Flutter'),
+                ChatThread(name: 'REST API Explanation'),
+                ChatThread(name: 'Jitsi Meet in Flutter'),
+                ChatThread(name: 'Websockets in Flutter'),
               ],
             ),
           ),
