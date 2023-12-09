@@ -7,7 +7,7 @@ import 'package:boilerplate/core/widgets/progress_indicator_widget.dart';
 import 'package:boilerplate/core/widgets/rounded_button_widget.dart';
 import 'package:boilerplate/core/widgets/textfield_widget.dart';
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
-import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
+import 'package:boilerplate/presentation/home_demo/store/theme/theme_store.dart';
 import 'package:boilerplate/presentation/login/store/login_store.dart';
 import 'package:boilerplate/utils/device/device_utils.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';

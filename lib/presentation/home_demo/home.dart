@@ -1,7 +1,7 @@
 import 'package:boilerplate/data/sharedpref/constants/preferences.dart';
 import 'package:boilerplate/di/service_locator.dart';
-import 'package:boilerplate/presentation/home/store/language/language_store.dart';
-import 'package:boilerplate/presentation/home/store/theme/theme_store.dart';
+import 'package:boilerplate/presentation/home_demo/store/language/language_store.dart';
+import 'package:boilerplate/presentation/home_demo/store/theme/theme_store.dart';
 import 'package:boilerplate/presentation/post/post_list.dart';
 import 'package:boilerplate/utils/locale/app_localization.dart';
 import 'package:boilerplate/utils/routes/routes.dart';
