@@ -113,10 +113,10 @@ class AppThemeData {
     headlineSmall: GoogleFonts.roboto(fontWeight: _medium, fontSize: 16.0),
     titleMedium: GoogleFonts.roboto(fontWeight: _medium, fontSize: 16.0),
     labelSmall: GoogleFonts.roboto(fontWeight: _medium, fontSize: 12.0),
-    bodyLarge: GoogleFonts.roboto(fontWeight: _regular, fontSize: 14.0),
+    bodyLarge: GoogleFonts.roboto(fontWeight: _regular, fontSize: 18.0),
     titleSmall: GoogleFonts.roboto(fontWeight: _medium, fontSize: 14.0),
     bodyMedium: GoogleFonts.roboto(fontWeight: _regular, fontSize: 16.0),
-    titleLarge: GoogleFonts.roboto(fontWeight: _bold, fontSize: 16.0),
+    titleLarge: GoogleFonts.roboto(fontWeight: _bold, fontSize: 20.0),
     labelLarge: GoogleFonts.roboto(fontWeight: _semiBold, fontSize: 14.0),
   );
 }

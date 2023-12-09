@@ -63,6 +63,8 @@ dependencies:
   xxtea: ^2.1.0
   json_annotation: ^4.8.1
   font_awesome_flutter: ^10.6.0
+  flutter_svg: ^2.0.9
+  emoji_picker_flutter: ^1.6.3
   # Y
   # Z
 
