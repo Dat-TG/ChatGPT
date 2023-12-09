@@ -42,6 +42,8 @@ class AppThemeData {
         backgroundColor: colorScheme.background,
         elevation: 0,
         iconTheme: IconThemeData(color: colorScheme.primary),
+        titleTextStyle:
+            _textTheme.headlineMedium!.apply(color: colorScheme.primary),
       ),
       iconTheme: IconThemeData(color: colorScheme.onPrimary),
       canvasColor: colorScheme.background,
@@ -98,15 +100,15 @@ class AppThemeData {
   static const _bold = FontWeight.w700;
 
   static final TextTheme _textTheme = TextTheme(
-    headlineMedium: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 20.0),
-    bodySmall: GoogleFonts.oswald(fontWeight: _semiBold, fontSize: 16.0),
-    headlineSmall: GoogleFonts.oswald(fontWeight: _medium, fontSize: 16.0),
-    titleMedium: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 16.0),
-    labelSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 12.0),
-    bodyLarge: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 14.0),
-    titleSmall: GoogleFonts.montserrat(fontWeight: _medium, fontSize: 14.0),
-    bodyMedium: GoogleFonts.montserrat(fontWeight: _regular, fontSize: 16.0),
-    titleLarge: GoogleFonts.montserrat(fontWeight: _bold, fontSize: 16.0),
-    labelLarge: GoogleFonts.montserrat(fontWeight: _semiBold, fontSize: 14.0),
+    headlineMedium: GoogleFonts.roboto(fontWeight: _bold, fontSize: 20.0),
+    bodySmall: GoogleFonts.roboto(fontWeight: _semiBold, fontSize: 16.0),
+    headlineSmall: GoogleFonts.roboto(fontWeight: _medium, fontSize: 16.0),
+    titleMedium: GoogleFonts.roboto(fontWeight: _medium, fontSize: 16.0),
+    labelSmall: GoogleFonts.roboto(fontWeight: _medium, fontSize: 12.0),
+    bodyLarge: GoogleFonts.roboto(fontWeight: _regular, fontSize: 14.0),
+    titleSmall: GoogleFonts.roboto(fontWeight: _medium, fontSize: 14.0),
+    bodyMedium: GoogleFonts.roboto(fontWeight: _regular, fontSize: 16.0),
+    titleLarge: GoogleFonts.roboto(fontWeight: _bold, fontSize: 16.0),
+    labelLarge: GoogleFonts.roboto(fontWeight: _semiBold, fontSize: 14.0),
   );
 }
