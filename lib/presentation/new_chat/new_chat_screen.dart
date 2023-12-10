@@ -1,5 +1,6 @@
 import 'package:boilerplate/core/widgets/chat_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NewChatScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
                     height: 10,
                   ),
                   Text(
-                    'How can I help you today?',
+                    'How can I help you today? ${dotenv.env['OPEN_API_ACCESS_KEY']}',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ],
