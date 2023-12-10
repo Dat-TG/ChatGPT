@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 class ChatThread extends StatefulWidget {
   final String name;
-  const ChatThread({Key? key, required this.name}) : super(key: key);
+  final VoidCallback onTap;
+  const ChatThread({Key? key, required this.name, required this.onTap})
+      : super(key: key);
 
   @override
   State<ChatThread> createState() => _ChatThreadState();
@@ -49,7 +53,9 @@ class _ChatThreadState extends State<ChatThread> {
       },
       child: ListTile(
         title: Text(widget.name),
-        onTap: () {},
+        onTap: () {
+          widget.onTap();
+        },
       ),
     );
   }

@@ -118,5 +118,9 @@ class AppThemeData {
     bodyMedium: GoogleFonts.roboto(fontWeight: _regular, fontSize: 16.0),
     titleLarge: GoogleFonts.roboto(fontWeight: _bold, fontSize: 20.0),
     labelLarge: GoogleFonts.roboto(fontWeight: _semiBold, fontSize: 14.0),
+    displayMedium: GoogleFonts.roboto(
+      fontWeight: _regular,
+      fontSize: 14.0,
+    ),
   );
 }
