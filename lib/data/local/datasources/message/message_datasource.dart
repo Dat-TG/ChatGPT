@@ -53,7 +53,7 @@ class MessageDataSource {
     }).toList();
   }
 
-  Future<PostList> getAllChatThreads() async {
+  Future<List<ChatThread>> getAllChatThreads() async {
     print('Loading from database');
 
     // post list
