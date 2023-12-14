@@ -31,109 +31,109 @@ class MainDrawer extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                ChatThread(
+                ChatThreadWidget(
                   name: 'GraphQL in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'REST API Explanation',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'Jitsi Meet in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'Websockets in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'ChatGPT Flutter App',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'GraphQL in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'REST API Explanation',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'Jitsi Meet in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'Websockets in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'GraphQL in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'REST API Explanation',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'Jitsi Meet in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'Websockets in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'ChatGPT Flutter App',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'GraphQL in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'REST API Explanation',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'Jitsi Meet in Flutter',
                   onTap: () {
                     setChatThreadId('1');
                   },
                 ),
-                ChatThread(
+                ChatThreadWidget(
                   name: 'Websockets in Flutter',
                   onTap: () {
                     setChatThreadId('1');

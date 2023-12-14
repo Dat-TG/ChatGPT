@@ -1,18 +1,16 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
-class ChatThread extends StatefulWidget {
+class ChatThreadWidget extends StatefulWidget {
   final String name;
   final VoidCallback onTap;
-  const ChatThread({Key? key, required this.name, required this.onTap})
+  const ChatThreadWidget({Key? key, required this.name, required this.onTap})
       : super(key: key);
 
   @override
-  State<ChatThread> createState() => _ChatThreadState();
+  State<ChatThreadWidget> createState() => _ChatThreadWidgetState();
 }
 
-class _ChatThreadState extends State<ChatThread> {
+class _ChatThreadWidgetState extends State<ChatThreadWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
