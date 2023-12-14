@@ -1,4 +1,6 @@
 import 'package:boilerplate/core/widgets/chat_input.dart';
+import 'package:boilerplate/di/service_locator.dart';
+import 'package:boilerplate/presentation/new_chat/store/new_chat_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -11,6 +13,7 @@ class NewChatScreen extends StatefulWidget {
 }
 
 class _NewChatScreenState extends State<NewChatScreen> {
+  NewChatStore _newChatStore = getIt<NewChatStore>();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -55,7 +58,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
         Align(
           alignment: Alignment.bottomCenter,
           child: ChatInput(
-            onSend: () {},
+            onSend: _newChatStore.sendMessage,
           ),
         ),
       ],

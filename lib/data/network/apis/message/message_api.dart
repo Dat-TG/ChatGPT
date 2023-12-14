@@ -20,7 +20,7 @@ class MessageApi {
       final res = await _dioClient.dio.post(Endpoints.chat, data: {
         "messages": messages.map((e) => e.toMap()).toList(),
         "model": "gpt-3.5-turbo",
-        "temperature": "0.5"
+        "temperature": 0.5
       });
       return Message.fromMap(res.data["choices"][0]["message"]);
     } catch (e) {

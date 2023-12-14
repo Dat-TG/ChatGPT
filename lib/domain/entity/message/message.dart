@@ -13,12 +13,12 @@ class Message {
   });
 
   factory Message.fromMap(Map<String, dynamic> json) => Message(
-        role: json["role"],
+        role: Role.values.byName(json["role"]),
         content: json["content"],
       );
 
   Map<String, dynamic> toMap() => {
-        "role": role,
+        "role": role.name,
         "content": content,
       };
 }

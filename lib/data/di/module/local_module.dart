@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:boilerplate/core/data/local/sembast/sembast_client.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
+import 'package:boilerplate/data/local/datasources/message/message_datasource.dart';
 import 'package:boilerplate/data/local/datasources/post/post_datasource.dart';
 import 'package:boilerplate/data/sharedpref/shared_preference_helper.dart';
 import 'package:flutter/foundation.dart';
@@ -33,5 +34,8 @@ mixin LocalModule {
     // data sources:------------------------------------------------------------
     getIt.registerSingleton(
         PostDataSource(await getIt.getAsync<SembastClient>()));
+
+    getIt.registerSingleton(
+        MessageDataSource(await getIt.getAsync<SembastClient>()));
   }
 }
