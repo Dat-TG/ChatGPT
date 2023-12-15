@@ -75,6 +75,7 @@ abstract class _NewChatStore with Store {
       this.success = true;
       ChatStore _chatStore = getIt<ChatStore>();
       _chatStore.setChatThreads([..._chatStore.chatThreads, chatThread]);
+      _chatStore.setChatThreadId(chatThread.id);
     }).catchError((e) {
       print(e);
       this.success = false;
