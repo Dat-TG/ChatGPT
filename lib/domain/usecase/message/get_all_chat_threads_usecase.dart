@@ -8,7 +8,7 @@ class GetAllChatThreadsUseCase extends UseCase<List<ChatThread>, void> {
   GetAllChatThreadsUseCase(this._messageRepository);
 
   @override
-  Future<List<ChatThread>> call({required void params}) {
+  Future<List<ChatThread>> call({void params}) {
     return _messageRepository.getAllChatThreads();
   }
 }

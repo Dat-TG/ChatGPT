@@ -1,11 +1,20 @@
 import 'package:boilerplate/core/widgets/chat_thread.dart';
+import 'package:boilerplate/di/service_locator.dart';
+import 'package:boilerplate/presentation/chat_screen/store/chat_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MainDrawer extends StatelessWidget {
+class MainDrawer extends StatefulWidget {
   final Function setChatThreadId;
   const MainDrawer({super.key, required this.setChatThreadId});
 
+  @override
+  State<MainDrawer> createState() => _MainDrawerState();
+}
+
+class _MainDrawerState extends State<MainDrawer> {
+  ChatStore _chatStore = getIt<ChatStore>();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -24,123 +33,30 @@ class MainDrawer extends StatelessWidget {
             title: Text('New chat'),
             minLeadingWidth: 10,
             onTap: () {
-              setChatThreadId(null);
+              widget.setChatThreadId(null);
             },
           ),
           Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                ChatThreadWidget(
-                  name: 'GraphQL in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'REST API Explanation',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'Jitsi Meet in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'Websockets in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'ChatGPT Flutter App',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'GraphQL in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'REST API Explanation',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'Jitsi Meet in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'Websockets in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'GraphQL in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'REST API Explanation',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'Jitsi Meet in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'Websockets in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'ChatGPT Flutter App',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'GraphQL in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'REST API Explanation',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'Jitsi Meet in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-                ChatThreadWidget(
-                  name: 'Websockets in Flutter',
-                  onTap: () {
-                    setChatThreadId('1');
-                  },
-                ),
-              ],
-            ),
+            child: Observer(builder: (context) {
+              if (_chatStore.isLoadingChatThreads) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return ListView(
+                padding: EdgeInsets.zero,
+                children: _chatStore.chatThreads
+                    .map(
+                      (e) => ChatThreadWidget(
+                        name: e.subject,
+                        onTap: () {
+                          _chatStore.setChatThreadId(e.id);
+                        },
+                      ),
+                    )
+                    .toList(),
+              );
+            }),
           ),
         ],
       ),

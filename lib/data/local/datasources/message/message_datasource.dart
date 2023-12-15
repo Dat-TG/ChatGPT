@@ -57,7 +57,7 @@ class MessageDataSource {
     print('Loading from database');
 
     // post list
-    var chatThreadList;
+    List<ChatThread> chatThreadList = [];
 
     // fetching data
     final recordSnapshots = await _messageStore.find(
