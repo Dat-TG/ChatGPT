@@ -2,7 +2,6 @@ import 'package:boilerplate/core/data/local/sembast/sembast_client.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/domain/entity/message/chat_thread.dart';
 import 'package:boilerplate/domain/entity/post/post.dart';
-import 'package:boilerplate/domain/entity/post/post_list.dart';
 import 'package:sembast/sembast.dart';
 
 class MessageDataSource {
@@ -87,13 +86,11 @@ class MessageDataSource {
     return chatThread;
   }
 
-  Future<int> update(Post post) async {
-    // For filtering by key (ID), RegEx, greater than, and many other criteria,
-    // we use a Finder.
-    final finder = Finder(filter: Filter.byKey(post.id));
+  Future<int> updateChatThread(ChatThread chatThread) async {
+    final finder = Finder(filter: Filter.byKey(chatThread.id));
     return await _messageStore.update(
       _sembastClient.database,
-      post.toMap(),
+      chatThread.toMap(),
       finder: finder,
     );
   }

@@ -7,6 +7,7 @@ import 'package:boilerplate/domain/usecase/message/get_all_chat_threads_usecase.
 import 'package:boilerplate/domain/usecase/message/get_chat_thread_by_id_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/save_chat_thread_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/send_message_usecase.dart';
+import 'package:boilerplate/domain/usecase/message/update_chat_thread_usecase.dart';
 import 'package:boilerplate/domain/usecase/post/delete_post_usecase.dart';
 import 'package:boilerplate/domain/usecase/post/find_post_by_id_usecase.dart';
 import 'package:boilerplate/domain/usecase/post/get_post_usecase.dart';
@@ -53,6 +54,10 @@ mixin UseCaseModule {
     );
     getIt.registerSingleton<SaveChatThreadUseCase>(
       SaveChatThreadUseCase(getIt<MessageRepository>()),
+    );
+
+    getIt.registerSingleton<UpdateChatThreadUseCase>(
+      UpdateChatThreadUseCase(getIt<MessageRepository>()),
     );
 
     getIt.registerSingleton<GetAllChatThreadsUseCase>(

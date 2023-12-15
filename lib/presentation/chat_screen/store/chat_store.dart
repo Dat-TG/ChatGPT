@@ -101,6 +101,10 @@ abstract class _ChatStore with Store {
         .messages
         .map((e) => e.message)
         .toList();
+    chatThreads
+        .firstWhere((element) => element.id == id)
+        .messages
+        .add(MessageWithTime(message, time));
     final future = _sendMessageUseCase.call(params: [...messages, message]);
     sendMessageFuture = ObservableFuture(future);
 

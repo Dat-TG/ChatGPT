@@ -39,6 +39,12 @@ class MessageRepositoryImpl extends MessageRepository {
       .catchError((error) => throw error);
 
   @override
+  Future<int> updateChatThread(ChatThread chatThread) => _messageDataSource
+      .updateChatThread(chatThread)
+      .then((id) => id)
+      .catchError((error) => throw error);
+
+  @override
   Future<List<ChatThread>> getAllChatThreads() => _messageDataSource
       .getAllChatThreads()
       .then((chatThreads) => chatThreads)

@@ -11,4 +11,6 @@ abstract class MessageRepository {
   Future<int> saveChatThread(ChatThread chatThread);
 
   Future<List<ChatThread>> getAllChatThreads();
+
+  Future<int> updateChatThread(ChatThread chatThread);
 }
