@@ -68,14 +68,20 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: CustomProgressIndicatorWidget(),
               );
             }
-            print(_chatStore.chatThreads);
             return ListView.builder(
               controller: _controller,
               itemCount:
-                  _chatStore.chatThreads[chatThreadIndex].messages.length,
+                  _chatStore.chatThreads[chatThreadIndex].messages.length +
+                      (_chatStore.isLoading ? 1 : 0),
               shrinkWrap: true,
               padding: EdgeInsets.zero,
               itemBuilder: (context, index) {
+                if (index > 0 &&
+                    index ==
+                        _chatStore
+                            .chatThreads[chatThreadIndex].messages.length) {
+                  return CustomProgressIndicatorWidget();
+                }
                 return Container(
                   padding: EdgeInsets.only(
                       left: (_chatStore.chatThreads[chatThreadIndex]
@@ -158,7 +164,7 @@ class _ChatScreenState extends State<ChatScreen> {
             );
           }),
         ),
-        ChatInput(onSend: () {}),
+        ChatInput(onSend: _chatStore.sendMessage),
       ],
     );
   }

@@ -6,6 +6,7 @@ import 'package:boilerplate/domain/repository/setting/setting_repository.dart';
 import 'package:boilerplate/domain/usecase/message/get_all_chat_threads_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/save_chat_thread_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/send_message_usecase.dart';
+import 'package:boilerplate/domain/usecase/message/update_chat_thread_usecase.dart';
 import 'package:boilerplate/domain/usecase/post/get_post_usecase.dart';
 import 'package:boilerplate/domain/usecase/user/is_logged_in_usecase.dart';
 import 'package:boilerplate/domain/usecase/user/login_usecase.dart';
@@ -73,6 +74,7 @@ mixin StoreModule {
         getIt<ErrorStore>(),
         getIt<SendMessageUseCase>(),
         getIt<GetAllChatThreadsUseCase>(),
+        getIt<UpdateChatThreadUseCase>(),
       ),
     );
   }

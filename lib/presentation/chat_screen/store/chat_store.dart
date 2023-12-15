@@ -4,6 +4,7 @@ import 'package:boilerplate/domain/entity/message/message.dart';
 import 'package:boilerplate/domain/entity/message/message_with_time.dart';
 import 'package:boilerplate/domain/usecase/message/get_all_chat_threads_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/send_message_usecase.dart';
+import 'package:boilerplate/domain/usecase/message/update_chat_thread_usecase.dart';
 
 import 'package:mobx/mobx.dart';
 
@@ -17,6 +18,7 @@ abstract class _ChatStore with Store {
     this.errorStore,
     this._sendMessageUseCase,
     this._getAllChatThreadsUseCase,
+    this._updateChatThreadUseCase,
   ) {
     // load all chat threads
     getAllChatThreads();
@@ -27,6 +29,7 @@ abstract class _ChatStore with Store {
   // use cases:-----------------------------------------------------------------
   final SendMessageUseCase _sendMessageUseCase;
   final GetAllChatThreadsUseCase _getAllChatThreadsUseCase;
+  final UpdateChatThreadUseCase _updateChatThreadUseCase;
 
   // store for handling error messages
   final ErrorStore errorStore;
@@ -58,8 +61,13 @@ abstract class _ChatStore with Store {
   @observable
   ObservableFuture<Message?> sendMessageFuture = ObservableFuture.value(null);
 
+  @observable
+  ObservableFuture<int?> updateChatThreadFuture = ObservableFuture.value(null);
+
   @computed
-  bool get isLoading => sendMessageFuture.status == FutureStatus.pending;
+  bool get isLoading =>
+      sendMessageFuture.status == FutureStatus.pending ||
+      updateChatThreadFuture.status == FutureStatus.pending;
 
   @computed
   bool get isLoadingChatThreads =>
@@ -110,18 +118,20 @@ abstract class _ChatStore with Store {
 
     await future.then((value) async {
       print('response message ${value.toMap()}');
-      // TODO: update chat thread in db
-      // await _saveChatThreadUseCase.call(
-      //   params: ChatThread(
-      //     id: time.millisecondsSinceEpoch,
-      //     subject: message.content,
-      //     messages: [
-      //       MessageWithTime(message, time),
-      //       MessageWithTime(value, time),
-      //     ],
-      //   ),
-      // );
-      this.success = true;
+      final newChatThread =
+          chatThreads.firstWhere((element) => element.id == id);
+      newChatThread.messages.add(
+        MessageWithTime(
+          value,
+          DateTime.now(),
+        ),
+      );
+      print(newChatThread);
+      final future = _updateChatThreadUseCase.call(
+        params: newChatThread,
+      );
+      updateChatThreadFuture = ObservableFuture(future);
+      await future.then((value) => {this.success = true});
     }).catchError((e) {
       print(e);
       this.success = false;
