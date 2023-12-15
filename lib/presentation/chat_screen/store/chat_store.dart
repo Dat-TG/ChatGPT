@@ -61,13 +61,8 @@ abstract class _ChatStore with Store {
   @observable
   ObservableFuture<Message?> sendMessageFuture = ObservableFuture.value(null);
 
-  @observable
-  ObservableFuture<int?> updateChatThreadFuture = ObservableFuture.value(null);
-
   @computed
-  bool get isLoading =>
-      sendMessageFuture.status == FutureStatus.pending ||
-      updateChatThreadFuture.status == FutureStatus.pending;
+  bool get isLoading => sendMessageFuture.status == FutureStatus.pending;
 
   @computed
   bool get isLoadingChatThreads =>
@@ -118,20 +113,17 @@ abstract class _ChatStore with Store {
 
     await future.then((value) async {
       print('response message ${value.toMap()}');
-      final newChatThread =
-          chatThreads.firstWhere((element) => element.id == id);
-      newChatThread.messages.add(
-        MessageWithTime(
-          value,
-          DateTime.now(),
-        ),
-      );
-      print(newChatThread);
+      chatThreads.firstWhere((element) => element.id == id).messages.add(
+            MessageWithTime(
+              value,
+              DateTime.now(),
+            ),
+          );
       final future = _updateChatThreadUseCase.call(
-        params: newChatThread,
+        params: chatThreads.firstWhere((element) => element.id == id),
       );
-      updateChatThreadFuture = ObservableFuture(future);
-      await future.then((value) => {this.success = true});
+      await future;
+      this.success = true;
     }).catchError((e) {
       print(e);
       this.success = false;

@@ -1,5 +1,6 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:boilerplate/core/widgets/chat_input.dart';
-import 'package:boilerplate/core/widgets/progress_indicator_widget.dart';
+import 'package:boilerplate/core/widgets/typing_indicator.dart';
 import 'package:boilerplate/di/service_locator.dart';
 import 'package:boilerplate/domain/entity/message/message.dart';
 import 'package:boilerplate/presentation/chat_screen/store/chat_store.dart';
@@ -34,11 +35,6 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   ChatStore _chatStore = getIt<ChatStore>();
 
   @override
@@ -61,13 +57,6 @@ class _ChatScreenState extends State<ChatScreen> {
                 child: Text('No messages yet'),
               );
             }
-            if (_chatStore.chatThreads.isEmpty ||
-                _chatStore.isLoading ||
-                _chatStore.isLoadingChatThreads) {
-              return const Center(
-                child: CustomProgressIndicatorWidget(),
-              );
-            }
             return ListView.builder(
               controller: _controller,
               itemCount:
@@ -80,22 +69,23 @@ class _ChatScreenState extends State<ChatScreen> {
                     index ==
                         _chatStore
                             .chatThreads[chatThreadIndex].messages.length) {
-                  return CustomProgressIndicatorWidget();
+                  return TypingIndicator();
                 }
                 return Container(
                   padding: EdgeInsets.only(
-                      left: (_chatStore.chatThreads[chatThreadIndex]
-                                  .messages[index].message.role ==
-                              Role.assistant)
-                          ? 14
-                          : 56,
-                      right: (_chatStore.chatThreads[chatThreadIndex]
-                                  .messages[index].message.role ==
-                              Role.assistant)
-                          ? 56
-                          : 14,
-                      top: 10,
-                      bottom: 10),
+                    left: (_chatStore.chatThreads[chatThreadIndex]
+                                .messages[index].message.role ==
+                            Role.assistant)
+                        ? 14
+                        : 56,
+                    right: (_chatStore.chatThreads[chatThreadIndex]
+                                .messages[index].message.role ==
+                            Role.assistant)
+                        ? 56
+                        : 14,
+                    top: 10,
+                    bottom: 10,
+                  ),
                   child: Column(
                     crossAxisAlignment: (_chatStore.chatThreads[chatThreadIndex]
                                 .messages[index].message.role ==
@@ -141,19 +131,48 @@ class _ChatScreenState extends State<ChatScreen> {
                                     : Theme.of(context).colorScheme.primary),
                             padding: const EdgeInsets.only(
                                 left: 16, right: 16, top: 16, bottom: 16),
-                            child: Text(
-                              _chatStore.chatThreads[chatThreadIndex]
-                                  .messages[index].message.content,
-                              style: TextStyle(
-                                  color: (_chatStore
+                            child: ((index ==
+                                        _chatStore.chatThreads[chatThreadIndex]
+                                                .messages.length -
+                                            1) &&
+                                    (_chatStore.chatThreads[chatThreadIndex]
+                                            .messages[index].message.role ==
+                                        Role.assistant))
+                                ? DefaultTextStyle(
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                    ),
+                                    child: AnimatedTextKit(
+                                      repeatForever: false,
+                                      displayFullTextOnTap: true,
+                                      isRepeatingAnimation: false,
+                                      animatedTexts: [
+                                        TyperAnimatedText(
+                                          _chatStore
                                               .chatThreads[chatThreadIndex]
                                               .messages[index]
                                               .message
-                                              .role ==
-                                          Role.assistant)
-                                      ? Colors.black
-                                      : Colors.white),
-                            ),
+                                              .content,
+                                          speed: Duration(milliseconds: 20),
+                                        ),
+                                      ],
+                                      onTap: () {},
+                                    ),
+                                  )
+                                : Text(
+                                    _chatStore.chatThreads[chatThreadIndex]
+                                        .messages[index].message.content,
+                                    style: TextStyle(
+                                        color: (_chatStore
+                                                    .chatThreads[
+                                                        chatThreadIndex]
+                                                    .messages[index]
+                                                    .message
+                                                    .role ==
+                                                Role.assistant)
+                                            ? Colors.black
+                                            : Colors.white),
+                                  ),
                           ),
                         ),
                       ),
@@ -164,7 +183,9 @@ class _ChatScreenState extends State<ChatScreen> {
             );
           }),
         ),
-        ChatInput(onSend: _chatStore.sendMessage),
+        ChatInput(onSend: (String content) {
+          _chatStore.sendMessage(content);
+        }),
       ],
     );
   }
