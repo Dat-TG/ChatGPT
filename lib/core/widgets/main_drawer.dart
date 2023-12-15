@@ -6,8 +6,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainDrawer extends StatefulWidget {
-  final Function setChatThreadId;
-  const MainDrawer({super.key, required this.setChatThreadId});
+  const MainDrawer({super.key});
 
   @override
   State<MainDrawer> createState() => _MainDrawerState();
@@ -33,7 +32,8 @@ class _MainDrawerState extends State<MainDrawer> {
             title: Text('New chat'),
             minLeadingWidth: 10,
             onTap: () {
-              widget.setChatThreadId(null);
+              _chatStore.setChatThreadId(-1);
+              Navigator.pop(context);
             },
           ),
           Expanded(
@@ -49,8 +49,10 @@ class _MainDrawerState extends State<MainDrawer> {
                     .map(
                       (e) => ChatThreadWidget(
                         name: e.subject,
+                        id: e.id,
                         onTap: () {
                           _chatStore.setChatThreadId(e.id);
+                          Navigator.pop(context);
                         },
                       ),
                     )

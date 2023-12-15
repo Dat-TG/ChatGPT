@@ -1,16 +1,25 @@
+import 'package:boilerplate/di/service_locator.dart';
+import 'package:boilerplate/presentation/chat_screen/store/chat_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class ChatThreadWidget extends StatefulWidget {
   final String name;
+  final int id;
   final VoidCallback onTap;
-  const ChatThreadWidget({Key? key, required this.name, required this.onTap})
-      : super(key: key);
+  const ChatThreadWidget({
+    Key? key,
+    required this.name,
+    required this.onTap,
+    required this.id,
+  }) : super(key: key);
 
   @override
   State<ChatThreadWidget> createState() => _ChatThreadWidgetState();
 }
 
 class _ChatThreadWidgetState extends State<ChatThreadWidget> {
+  ChatStore _chatStore = getIt<ChatStore>();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -49,12 +58,16 @@ class _ChatThreadWidgetState extends State<ChatThreadWidget> {
           }
         });
       },
-      child: ListTile(
-        title: Text(widget.name),
-        onTap: () {
-          widget.onTap();
-        },
-      ),
+      child: Observer(builder: (context) {
+        return ListTile(
+          tileColor: _chatStore.id == widget.id ? Colors.grey[700] : null,
+          textColor: _chatStore.id == widget.id ? Colors.white : null,
+          title: Text(widget.name),
+          onTap: () {
+            widget.onTap();
+          },
+        );
+      }),
     );
   }
 }

@@ -47,7 +47,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
                     height: 10,
                   ),
                   Text(
-                    'How can I help you today? ${dotenv.env['OPEN_API_ACCESS_KEY']}',
+                    'How can I help you today?',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ],
