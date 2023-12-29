@@ -13,4 +13,6 @@ abstract class MessageRepository {
   Future<List<ChatThread>> getAllChatThreads();
 
   Future<int> updateChatThread(ChatThread chatThread);
+
+  Future<int> deleteChatThread(int id);
 }

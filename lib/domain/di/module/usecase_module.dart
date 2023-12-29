@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:boilerplate/domain/repository/message/message_repository.dart';
 import 'package:boilerplate/domain/repository/post/post_repository.dart';
 import 'package:boilerplate/domain/repository/user/user_repository.dart';
+import 'package:boilerplate/domain/usecase/message/delete_chat_thread_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/get_all_chat_threads_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/get_chat_thread_by_id_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/save_chat_thread_usecase.dart';
@@ -66,6 +67,10 @@ mixin UseCaseModule {
 
     getIt.registerSingleton<GetChatThreadByIdUseCase>(
       GetChatThreadByIdUseCase(getIt<MessageRepository>()),
+    );
+
+    getIt.registerSingleton<DeleteChatThreadUseCase>(
+      DeleteChatThreadUseCase(getIt<MessageRepository>()),
     );
   }
 }

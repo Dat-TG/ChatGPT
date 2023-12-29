@@ -22,6 +22,50 @@ class ChatThreadWidget extends StatefulWidget {
 
 class _ChatThreadWidgetState extends State<ChatThreadWidget> {
   ChatStore _chatStore = getIt<ChatStore>();
+
+  Future<void> _showDeleteConfirmation(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible:
+          false, // Prevents dismissing the dialog on outside tap
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirm Delete'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Are you sure you want to delete this chat thread?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+              child: Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Perform deletion logic here
+                // For example, you might call a function to delete the chat thread
+                // deleteChatThread();
+                _chatStore.deleteChatThread(widget.id);
+                Navigator.of(context).pop(); // Close the dialog after deletion
+              },
+              child: Text(
+                'Delete',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -67,6 +111,7 @@ class _ChatThreadWidgetState extends State<ChatThreadWidget> {
             // Handle edit option
           } else if (value == 'delete') {
             // Handle delete option
+            _showDeleteConfirmation(context);
           }
         });
       },

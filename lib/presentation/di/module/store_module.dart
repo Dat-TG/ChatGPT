@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:boilerplate/core/stores/error/error_store.dart';
 import 'package:boilerplate/core/stores/form/form_store.dart';
 import 'package:boilerplate/domain/repository/setting/setting_repository.dart';
+import 'package:boilerplate/domain/usecase/message/delete_chat_thread_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/get_all_chat_threads_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/save_chat_thread_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/send_message_usecase.dart';
@@ -75,6 +76,7 @@ mixin StoreModule {
         getIt<SendMessageUseCase>(),
         getIt<GetAllChatThreadsUseCase>(),
         getIt<UpdateChatThreadUseCase>(),
+        getIt<DeleteChatThreadUseCase>(),
       ),
     );
   }

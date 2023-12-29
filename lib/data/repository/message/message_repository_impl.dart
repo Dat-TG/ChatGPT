@@ -49,4 +49,10 @@ class MessageRepositoryImpl extends MessageRepository {
       .getAllChatThreads()
       .then((chatThreads) => chatThreads)
       .catchError((error) => throw error);
+
+  @override
+  Future<int> deleteChatThread(int id) => _messageDataSource
+      .deleteChatThread(id)
+      .then((id) => id)
+      .catchError((error) => throw error);
 }

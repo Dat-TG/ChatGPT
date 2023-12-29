@@ -159,6 +159,14 @@ mixin _$ChatStore on _ChatStore, Store {
         .run(() => super.updateChatThread(chatThread));
   }
 
+  late final _$deleteChatThreadAsyncAction =
+      AsyncAction('_ChatStore.deleteChatThread', context: context);
+
+  @override
+  Future<dynamic> deleteChatThread(int id) {
+    return _$deleteChatThreadAsyncAction.run(() => super.deleteChatThread(id));
+  }
+
   late final _$sendMessageAsyncAction =
       AsyncAction('_ChatStore.sendMessage', context: context);
 

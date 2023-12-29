@@ -95,8 +95,8 @@ class MessageDataSource {
     );
   }
 
-  Future<int> delete(Post post) async {
-    final finder = Finder(filter: Filter.byKey(post.id));
+  Future<int> deleteChatThread(int id) async {
+    final finder = Finder(filter: Filter.byKey(id));
     return await _messageStore.delete(
       _sembastClient.database,
       finder: finder,

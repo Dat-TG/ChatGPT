@@ -2,6 +2,7 @@ import 'package:boilerplate/core/stores/error/error_store.dart';
 import 'package:boilerplate/domain/entity/message/chat_thread.dart';
 import 'package:boilerplate/domain/entity/message/message.dart';
 import 'package:boilerplate/domain/entity/message/message_with_time.dart';
+import 'package:boilerplate/domain/usecase/message/delete_chat_thread_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/get_all_chat_threads_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/send_message_usecase.dart';
 import 'package:boilerplate/domain/usecase/message/update_chat_thread_usecase.dart';
@@ -19,6 +20,7 @@ abstract class _ChatStore with Store {
     this._sendMessageUseCase,
     this._getAllChatThreadsUseCase,
     this._updateChatThreadUseCase,
+    this._deleteChatThreadUseCase,
   ) {
     // load all chat threads
     getAllChatThreads();
@@ -30,6 +32,7 @@ abstract class _ChatStore with Store {
   final SendMessageUseCase _sendMessageUseCase;
   final GetAllChatThreadsUseCase _getAllChatThreadsUseCase;
   final UpdateChatThreadUseCase _updateChatThreadUseCase;
+  final DeleteChatThreadUseCase _deleteChatThreadUseCase;
 
   // store for handling error messages
   final ErrorStore errorStore;
@@ -112,6 +115,21 @@ abstract class _ChatStore with Store {
       print('Object with ID $id not found');
     }
     final future = _updateChatThreadUseCase.call(params: chatThread);
+    updateChatThreadFuture = ObservableFuture(future);
+    await future.then((value) async {
+      print('response message ${value}');
+      this.success = true;
+    }).catchError((e) {
+      print(e);
+      this.success = false;
+      throw e;
+    });
+  }
+
+  @action
+  Future deleteChatThread(int id) async {
+    chatThreads.removeWhere((element) => element.id == id);
+    final future = _deleteChatThreadUseCase.call(params: id);
     updateChatThreadFuture = ObservableFuture(future);
     await future.then((value) async {
       print('response message ${value}');
