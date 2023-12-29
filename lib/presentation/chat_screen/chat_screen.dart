@@ -38,6 +38,12 @@ class _ChatScreenState extends State<ChatScreen> {
   ChatStore _chatStore = getIt<ChatStore>();
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
@@ -45,6 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
       children: [
         Expanded(
           child: Observer(builder: (context) {
+            print('new chat thread id: ${_chatStore.id}');
             if (_chatStore.id == -1) {
               return const Center(
                 child: Text('Select a chat to start'),
@@ -52,6 +59,9 @@ class _ChatScreenState extends State<ChatScreen> {
             }
             final int chatThreadIndex = _chatStore.chatThreads
                 .indexWhere((element) => element.id == _chatStore.id);
+            print('new chat thread index: ${chatThreadIndex}');
+            print(_chatStore
+                .chatThreads[chatThreadIndex].messages[1].message.content);
             if (_chatStore.chatThreads[chatThreadIndex].messages.isEmpty) {
               return const Center(
                 child: Text('No messages yet'),
@@ -72,6 +82,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   return TypingIndicator();
                 }
                 return Container(
+                  key: ValueKey(
+                      _chatStore.chatThreads[chatThreadIndex].messages[index]),
                   padding: EdgeInsets.only(
                     left: (_chatStore.chatThreads[chatThreadIndex]
                                 .messages[index].message.role ==
