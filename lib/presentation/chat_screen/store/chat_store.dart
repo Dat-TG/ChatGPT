@@ -52,11 +52,14 @@ abstract class _ChatStore with Store {
   int id = 0;
 
   @observable
-  List<ChatThread> chatThreads = [];
+  ObservableList<ChatThread> chatThreads = ObservableList.of([]);
 
   @observable
   ObservableFuture<List<ChatThread>?> chatThreadsFuture =
       ObservableFuture.value(null);
+
+  @observable
+  ObservableFuture<int?> updateChatThreadFuture = ObservableFuture.value(null);
 
   @observable
   ObservableFuture<Message?> sendMessageFuture = ObservableFuture.value(null);
@@ -68,6 +71,10 @@ abstract class _ChatStore with Store {
   bool get isLoadingChatThreads =>
       chatThreadsFuture.status == FutureStatus.pending;
 
+  @computed
+  bool get isUpdatingChatThread =>
+      updateChatThreadFuture.status == FutureStatus.pending;
+
   // actions:-------------------------------------------------------------------
   @action
   Future setChatThreadId(int newId) async {
@@ -76,7 +83,7 @@ abstract class _ChatStore with Store {
 
   @action
   Future setChatThreads(List<ChatThread> newChatThreads) async {
-    chatThreads = newChatThreads;
+    chatThreads = ObservableList.of(newChatThreads);
   }
 
   @action
@@ -87,7 +94,28 @@ abstract class _ChatStore with Store {
     await future.then((value) async {
       print('response message ${value}');
       this.success = true;
-      this.chatThreads = value;
+      this.chatThreads = ObservableList.of(value);
+    }).catchError((e) {
+      print(e);
+      this.success = false;
+      throw e;
+    });
+  }
+
+  @action
+  Future updateChatThread(ChatThread chatThread) async {
+    int index = chatThreads.indexWhere((e) => e.id == chatThread.id);
+    if (index != -1) {
+      chatThreads[index] = chatThread;
+      print('Object with ID $id updated');
+    } else {
+      print('Object with ID $id not found');
+    }
+    final future = _updateChatThreadUseCase.call(params: chatThread);
+    updateChatThreadFuture = ObservableFuture(future);
+    await future.then((value) async {
+      print('response message ${value}');
+      this.success = true;
     }).catchError((e) {
       print(e);
       this.success = false;

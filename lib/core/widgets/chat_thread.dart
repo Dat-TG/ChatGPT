@@ -1,4 +1,6 @@
+import 'package:boilerplate/core/widgets/change_chat_thread_name_dialog.dart';
 import 'package:boilerplate/di/service_locator.dart';
+import 'package:boilerplate/domain/entity/message/chat_thread.dart';
 import 'package:boilerplate/presentation/chat_screen/store/chat_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -51,7 +53,17 @@ class _ChatThreadWidgetState extends State<ChatThreadWidget> {
           ],
           elevation: 8.0,
         ).then((value) {
+          ChatThread chatThread = _chatStore.chatThreads
+              .firstWhere((element) => element.id == widget.id);
           if (value == 'rename') {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return ChangeChatThreadNameDialog(
+                  chatThread: chatThread,
+                );
+              },
+            );
             // Handle edit option
           } else if (value == 'delete') {
             // Handle delete option

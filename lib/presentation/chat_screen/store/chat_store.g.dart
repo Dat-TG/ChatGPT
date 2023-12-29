@@ -22,6 +22,13 @@ mixin _$ChatStore on _ChatStore, Store {
           Computed<bool>(() => super.isLoadingChatThreads,
               name: '_ChatStore.isLoadingChatThreads'))
       .value;
+  Computed<bool>? _$isUpdatingChatThreadComputed;
+
+  @override
+  bool get isUpdatingChatThread => (_$isUpdatingChatThreadComputed ??=
+          Computed<bool>(() => super.isUpdatingChatThread,
+              name: '_ChatStore.isUpdatingChatThread'))
+      .value;
 
   late final _$successAtom = Atom(name: '_ChatStore.success', context: context);
 
@@ -57,13 +64,13 @@ mixin _$ChatStore on _ChatStore, Store {
       Atom(name: '_ChatStore.chatThreads', context: context);
 
   @override
-  List<ChatThread> get chatThreads {
+  ObservableList<ChatThread> get chatThreads {
     _$chatThreadsAtom.reportRead();
     return super.chatThreads;
   }
 
   @override
-  set chatThreads(List<ChatThread> value) {
+  set chatThreads(ObservableList<ChatThread> value) {
     _$chatThreadsAtom.reportWrite(value, super.chatThreads, () {
       super.chatThreads = value;
     });
@@ -82,6 +89,23 @@ mixin _$ChatStore on _ChatStore, Store {
   set chatThreadsFuture(ObservableFuture<List<ChatThread>?> value) {
     _$chatThreadsFutureAtom.reportWrite(value, super.chatThreadsFuture, () {
       super.chatThreadsFuture = value;
+    });
+  }
+
+  late final _$updateChatThreadFutureAtom =
+      Atom(name: '_ChatStore.updateChatThreadFuture', context: context);
+
+  @override
+  ObservableFuture<int?> get updateChatThreadFuture {
+    _$updateChatThreadFutureAtom.reportRead();
+    return super.updateChatThreadFuture;
+  }
+
+  @override
+  set updateChatThreadFuture(ObservableFuture<int?> value) {
+    _$updateChatThreadFutureAtom
+        .reportWrite(value, super.updateChatThreadFuture, () {
+      super.updateChatThreadFuture = value;
     });
   }
 
@@ -126,6 +150,15 @@ mixin _$ChatStore on _ChatStore, Store {
     return _$getAllChatThreadsAsyncAction.run(() => super.getAllChatThreads());
   }
 
+  late final _$updateChatThreadAsyncAction =
+      AsyncAction('_ChatStore.updateChatThread', context: context);
+
+  @override
+  Future<dynamic> updateChatThread(ChatThread chatThread) {
+    return _$updateChatThreadAsyncAction
+        .run(() => super.updateChatThread(chatThread));
+  }
+
   late final _$sendMessageAsyncAction =
       AsyncAction('_ChatStore.sendMessage', context: context);
 
@@ -141,9 +174,11 @@ success: ${success},
 id: ${id},
 chatThreads: ${chatThreads},
 chatThreadsFuture: ${chatThreadsFuture},
+updateChatThreadFuture: ${updateChatThreadFuture},
 sendMessageFuture: ${sendMessageFuture},
 isLoading: ${isLoading},
-isLoadingChatThreads: ${isLoadingChatThreads}
+isLoadingChatThreads: ${isLoadingChatThreads},
+isUpdatingChatThread: ${isUpdatingChatThread}
     ''';
   }
 }

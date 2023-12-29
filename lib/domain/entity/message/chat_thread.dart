@@ -20,4 +20,15 @@ class ChatThread {
         "subject": subject,
         "messages": List<dynamic>.from(messages.map((x) => x.toMap())),
       };
+  ChatThread copyWith({
+    int? id,
+    String? subject,
+    List<MessageWithTime>? messages,
+  }) {
+    return ChatThread(
+      id: id ?? this.id,
+      subject: subject ?? this.subject,
+      messages: messages ?? this.messages,
+    );
+  }
 }
