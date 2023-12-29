@@ -86,6 +86,7 @@ class _ChatThreadWidgetState extends State<ChatThreadWidget> {
           items: [
             PopupMenuItem(
               child: ListTile(
+                contentPadding: EdgeInsets.zero,
                 leading: Icon(Icons.edit_outlined),
                 title: Text('Rename'),
               ),
@@ -93,6 +94,7 @@ class _ChatThreadWidgetState extends State<ChatThreadWidget> {
             ),
             PopupMenuItem(
               child: ListTile(
+                contentPadding: EdgeInsets.zero,
                 leading: Icon(Icons.delete_outline),
                 title: Text('Delete'),
               ),
