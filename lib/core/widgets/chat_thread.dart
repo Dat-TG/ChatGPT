@@ -50,6 +50,10 @@ class _ChatThreadWidgetState extends State<ChatThreadWidget> {
                 // Perform deletion logic here
                 // For example, you might call a function to delete the chat thread
                 // deleteChatThread();
+                int currentId = _chatStore.id;
+                if (currentId == widget.id) {
+                  _chatStore.setChatThreadId(-1);
+                }
                 _chatStore.deleteChatThread(widget.id);
                 Navigator.of(context).pop(); // Close the dialog after deletion
               },
