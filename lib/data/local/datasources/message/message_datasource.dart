@@ -1,7 +1,6 @@
 import 'package:boilerplate/core/data/local/sembast/sembast_client.dart';
 import 'package:boilerplate/data/local/constants/db_constants.dart';
 import 'package:boilerplate/domain/entity/message/chat_thread.dart';
-import 'package:boilerplate/domain/entity/post/post.dart';
 import 'package:sembast/sembast.dart';
 
 class MessageDataSource {

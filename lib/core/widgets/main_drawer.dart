@@ -36,6 +36,9 @@ class _MainDrawerState extends State<MainDrawer> {
               Navigator.pop(context);
             },
           ),
+          Divider(
+            height: 1,
+          ),
           Expanded(
             child: Observer(builder: (context) {
               if (_chatStore.isLoadingChatThreads) {
@@ -44,6 +47,7 @@ class _MainDrawerState extends State<MainDrawer> {
                 );
               }
               return ListView(
+                clipBehavior: Clip.antiAlias,
                 padding: EdgeInsets.zero,
                 children: _chatStore.chatThreads
                     .map(
@@ -59,6 +63,17 @@ class _MainDrawerState extends State<MainDrawer> {
                     .toList(),
               );
             }),
+          ),
+          Divider(
+            height: 1,
+          ),
+          ListTile(
+            leading: FaIcon(
+              FontAwesomeIcons.solidStar,
+              size: 20,
+            ),
+            title: Text('Lê Công Đắt'),
+            minLeadingWidth: 10,
           ),
         ],
       ),

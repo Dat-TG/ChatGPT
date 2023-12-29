@@ -21,8 +21,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void scrollToBottom() {
     if (_controller.hasClients) {
-      _controller.jumpTo(
+      _controller.animateTo(
         _controller.position.maxScrollExtent,
+        duration: Duration(seconds: 1),
+        curve: Curves.fastOutSlowIn,
       );
     }
   }
@@ -36,6 +38,11 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   ChatStore _chatStore = getIt<ChatStore>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -62,6 +69,10 @@ class _ChatScreenState extends State<ChatScreen> {
             print('new chat thread index: ${chatThreadIndex}');
             print(_chatStore
                 .chatThreads[chatThreadIndex].messages[1].message.content);
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              scrollToBottom();
+            });
+
             if (_chatStore.chatThreads[chatThreadIndex].messages.isEmpty) {
               return const Center(
                 child: Text('No messages yet'),
@@ -69,6 +80,7 @@ class _ChatScreenState extends State<ChatScreen> {
             }
             return ListView.builder(
               controller: _controller,
+              physics: AlwaysScrollableScrollPhysics(),
               itemCount:
                   _chatStore.chatThreads[chatThreadIndex].messages.length +
                       (_chatStore.isLoading ? 1 : 0),
@@ -143,7 +155,14 @@ class _ChatScreenState extends State<ChatScreen> {
                                     : Theme.of(context).colorScheme.primary),
                             padding: const EdgeInsets.only(
                                 left: 16, right: 16, top: 16, bottom: 16),
-                            child: ((index ==
+                            child: ((DateTime.now()
+                                            .difference(_chatStore
+                                                .chatThreads[chatThreadIndex]
+                                                .messages[index]
+                                                .time)
+                                            .inSeconds <
+                                        30) &&
+                                    (index ==
                                         _chatStore.chatThreads[chatThreadIndex]
                                                 .messages.length -
                                             1) &&
@@ -205,6 +224,7 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         ChatInput(onSend: (String content) {
           _chatStore.sendMessage(content);
+          scrollToBottom();
         }),
       ],
     );

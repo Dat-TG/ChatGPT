@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field, override_on_non_overriding_member
+
 import 'package:boilerplate/core/stores/error/error_store.dart';
 import 'package:boilerplate/domain/entity/language/Language.dart';
 import 'package:boilerplate/domain/repository/setting/setting_repository.dart';
