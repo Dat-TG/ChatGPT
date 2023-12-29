@@ -4,15 +4,15 @@ This is an assignment of Advanced Mobile Programming module at FIT-HCMUS
 
 20120454 - Lê Công Đắt
 
-# Tech Stack
+## Tech Stack
 
 Flutter, [Flutter Boilerplate](https://github.com/zubairehman/flutter_boilerplate_project)
 
-# Video Demo
+## Video Demo
 
 Youtube: https://youtu.be/VP1b0xhNbR8
 
-# Features
+## Features
 - AI chat (maintain context for the AI chat to understand the content of previous chats).
 - Store chat threads and provide the option to select older chat threads on the sidebar for continued chatting.
 - Rename a chat thread
