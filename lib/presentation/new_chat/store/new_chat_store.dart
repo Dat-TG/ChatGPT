@@ -46,6 +46,10 @@ abstract class _NewChatStore with Store {
   bool success = false;
 
   @observable
+  MessageWithTime userMessage =
+      MessageWithTime(Message(role: Role.user, content: ''), DateTime.now());
+
+  @observable
   ObservableFuture<Message?> sendMessageFuture = ObservableFuture.value(null);
 
   @computed
@@ -56,6 +60,7 @@ abstract class _NewChatStore with Store {
   Future sendMessage(String content) async {
     final Message message = Message(role: Role.user, content: content);
     final time = DateTime.now();
+    userMessage = MessageWithTime(message, time);
     final future = _sendMessageUseCase.call(params: [message]);
     sendMessageFuture = ObservableFuture(future);
 

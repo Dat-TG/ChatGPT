@@ -128,7 +128,7 @@ class _TypingIndicatorState extends State<TypingIndicator>
       child: Stack(
         children: [
           AnimatedBubble(
-            animation: _largeBubbleAnimation,
+            animation: _smallBubbleAnimation,
             left: 12,
             bottom: 12,
             bubble: StatusBubble(

@@ -156,7 +156,15 @@ class _ChatScreenState extends State<ChatScreen> {
                                           speed: Duration(milliseconds: 20),
                                         ),
                                       ],
-                                      onTap: () {},
+                                      onTap: () {
+                                        setState(() {
+                                          if (showTimeAtIndex != index) {
+                                            showTimeAtIndex = index;
+                                          } else {
+                                            showTimeAtIndex = -1;
+                                          }
+                                        });
+                                      },
                                     ),
                                   )
                                 : Text(
