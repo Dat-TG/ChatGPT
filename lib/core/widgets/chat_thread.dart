@@ -123,7 +123,11 @@ class _ChatThreadWidgetState extends State<ChatThreadWidget> {
         return ListTile(
           tileColor: _chatStore.id == widget.id ? Colors.grey[700] : null,
           textColor: _chatStore.id == widget.id ? Colors.white : null,
-          title: Text(widget.name),
+          title: Text(
+            widget.name,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
           onTap: () {
             widget.onTap();
           },
