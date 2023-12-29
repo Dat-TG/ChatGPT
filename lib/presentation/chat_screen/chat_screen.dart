@@ -79,7 +79,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     index ==
                         _chatStore
                             .chatThreads[chatThreadIndex].messages.length) {
-                  return TypingIndicator();
+                  return const TypingIndicator();
                 }
                 return Container(
                   key: ValueKey(

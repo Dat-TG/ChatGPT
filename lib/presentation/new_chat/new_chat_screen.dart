@@ -68,7 +68,7 @@ class _NewChatScreenState extends State<NewChatScreen> {
                           ],
                         ),
                       ),
-                      const TypingIndicator(),
+                      TypingIndicator(),
                     ],
                   ),
                 ),
